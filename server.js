@@ -32,7 +32,7 @@ app.use('/api/reports', reportRoutes);
 // Public, no-login routes for customers scanning a QR code
 app.use('/api/public', publicRoutes);
 
-// Fallback error handler
+// Fallback error handler gdflgkdogjdogrsdihiu
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ error: 'Something went wrong' });
