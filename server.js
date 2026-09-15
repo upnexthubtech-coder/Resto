@@ -13,7 +13,18 @@ const publicRoutes = require('./routes/publicRoutes');
 const app = express();
 const httpServer = http.createServer(app);
 
-const allowedOrigins = [process.env.ADMIN_APP_URL, process.env.MENU_APP_URL].filter(Boolean);
+function getOrigin(value) {
+  if (!value) return null;
+  try {
+    return new URL(value).origin;
+  } catch {
+    return value.replace(/\/$/, '');
+  }
+}
+
+const allowedOrigins = [process.env.ADMIN_APP_URL, process.env.MENU_APP_URL]
+  .map(getOrigin)
+  .filter(Boolean);
 
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
